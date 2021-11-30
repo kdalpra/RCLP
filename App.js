@@ -445,7 +445,7 @@ export default class App extends React.Component {
       else{ 
         this.setState({
           value: parseInt(this.state.value) + 1,
-          myNumber: (parseInt(this.state.myNumber) + 1).toString(),
+          myNumber: (parseInt(this.state.value) + 1).toString(),
         })
       }
     }
@@ -497,13 +497,12 @@ setFun = () =>{
       
         <View style = {{flexDirection: 'column', width: '80%', height: '40%', alignItems: 'center', justifyContent: 'center'}}>
 
-        <View style = {{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', textAlign: 'center'}}>
+        <View style = {{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', textAlign: 'center', width:'100%'}}>
 
         <Button onPress={this.decValue} title="Back"/>
         <Text>      </Text>
 
-        <Text 
-            style={styles.textInput} > {this.state.myNumber} </Text>
+        <Text style={styles.textInput} > {this.state.myNumber} </Text>
           
           <Text>      </Text>
 
@@ -519,7 +518,7 @@ setFun = () =>{
         </View>
 
 
-        <View style = {{flexDirection: 'row', height:'25%'}}>
+        <View style = {{flexDirection: 'row', height:'25%', width:"100%"}}>
 
         <TouchableOpacity style = {styles.container2}onPress = {() =>{this.keyPad("7")}} >
         <Text style = {styles.textCont}>7</Text>
@@ -536,7 +535,7 @@ setFun = () =>{
         
 
         </View>
-        <View style = {{flexDirection: 'row', height:'25%'}}>
+        <View style = {{flexDirection: 'row', height:'25%', width:"100%"}}>
         <TouchableOpacity style = {styles.container2}onPress = {() =>{this.keyPad("4")}}>
         <Text style = {styles.textCont}>4</Text>
         </TouchableOpacity>
@@ -549,7 +548,7 @@ setFun = () =>{
         <Text style = {styles.textCont} >6</Text>
         </TouchableOpacity>
         </View>
-        <View style = {{flexDirection: 'row', height:'25%'}}>
+        <View style = {{flexDirection: 'row', height:'25%', width:"100%"}}>
         <TouchableOpacity style = {styles.container2} onPress = {() =>{this.keyPad("1")}}>
         <Text style = {styles.textCont} >1</Text>
         </TouchableOpacity>
@@ -562,7 +561,7 @@ setFun = () =>{
         <Text style = {styles.textCont}>3</Text>
         </TouchableOpacity>
         </View>
-        <View style = {{flexDirection: 'row', height:'25%'}}>
+        <View style = {{flexDirection: 'row', height:'25%', width:"100%"}}>
         <TouchableOpacity style = {styles.container3} onPress = {() =>{this.keyPad("0")}} >
         <Text style = {styles.textCont} >0</Text>
         </TouchableOpacity>
@@ -615,6 +614,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ddd',
     height: '90%',
     fontSize: 50,
+    width: '67%',
    // width: 1000,
     alignItems: 'center',
     justifyContent: 'center',
@@ -626,9 +626,9 @@ const styles = StyleSheet.create({
       color: 'gray'
   },
   textInput:{
+    //flex: 1,
     backgroundColor: 'white',
     width: '50%',
-    
     paddingTop: '5%',
     paddingBottom: '5%',
     textAlign: 'center',

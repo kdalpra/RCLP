@@ -16,19 +16,20 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "wildsteelerfan.tk.rclp"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "softwareKeyboardLayoutMode": "pan"
+      "softwareKeyboardLayoutMode": "pan",
+      "package": "wildsteelerfan.tk.rclp"
     }
   }
 }
