@@ -2,7 +2,7 @@
   "expo": {
     "name": "RCLP",
     "slug": "RCLP",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -29,7 +29,10 @@
         "backgroundColor": "#FFFFFF"
       },
       "softwareKeyboardLayoutMode": "pan",
-      "package": "wildsteelerfan.tk.rclp"
-    }
+      "versionCode": 6,
+      "package": "wildsteelerfan.tk.rclp",
+      "permissions": []
+    },
+    "description": ""
   }
 }

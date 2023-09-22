@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Button, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity, ScrollView, Image } from 'react-native';
+import * as WebBrowser from 'expo-web-browser';
 
 
 const DismissKeyboard = ({children}) => (
@@ -429,11 +430,14 @@ export default class App extends React.Component {
   state = {
     value:0,
     myNumber:"0", 
+    parenth:")",
+    leftArrow:'<',
+    rightArrow: '>',
   }
 
   incValue = () =>{
     if(this.state.myNumber === "" || !this.state.myNumber){
-      this.setState({myNumber: "0"})
+      this.setState({myNumber: (this.state.value).toString()})
     }
     else{
       if(this.state.myNumber === "9999" || this.state.value == 9999){
@@ -449,14 +453,14 @@ export default class App extends React.Component {
         })
       }
     }
-  }
+  } 
 
   decValue = () =>{
     if(this.state.myNumber === "" || !this.state.myNumber){
-      this.setState({myNumber: "0"})
+      this.setState({myNumber: (this.state.value).toString()})
     }
     else{
-      if(this.state.myNumber === "0" || this.state.value == 0){
+      if( this.state.value == 0){
         this.setState({
           value: 9999,
           myNumber: "9999",
@@ -465,7 +469,7 @@ export default class App extends React.Component {
       else{
         this.setState({
           value: parseInt(this.state.value) - 1,
-          myNumber: (parseInt(this.state.myNumber) - 1).toString(),
+          myNumber: (parseInt(this.state.value) - 1).toString(),
         })
       }
     }
@@ -473,6 +477,7 @@ export default class App extends React.Component {
 
 keyPad = (num) =>{
   if(this.state.myNumber.length < 4){
+    console.log("hit")
     let newText = this.state.myNumber + num
     this.setState({myNumber: newText})
   }
@@ -487,34 +492,53 @@ setFun = () =>{
   }
 }
 
+irlHeirloom = () =>{
+  WebBrowser.openBrowserAsync("https://displate.com/displate/5803719?art=5f091ef9094fa");
+}
+
+
   render() {
     return (
 
+      
       <DismissKeyboard>
+      
      <View style={styles.container}>
-        
-      <StatusBar style="auto" />
+     
+      <StatusBar style="light" />
       
         <View style = {{flexDirection: 'column', width: '80%', height: '40%', alignItems: 'center', justifyContent: 'center'}}>
-
+        
+        <TouchableOpacity  onPress= {this.irlHeirloom} > 
+        <Image source={require('./assets/icon.png')} style= {{width: 125, height:125}} />
+          </TouchableOpacity>
+    
         <View style = {{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', textAlign: 'center', width:'100%'}}>
 
-        <Button onPress={this.decValue} title="Back"/>
+        <TouchableOpacity style={styles.leftRight} onPress={this.decValue}> 
+          <Text style = {{fontSize: 50, color:'white'}}> {this.state.leftArrow} </Text>
+          </TouchableOpacity>
         <Text>      </Text>
 
-        <Text style={styles.textInput} > {this.state.myNumber} </Text>
+        <Text style={styles.textInput} ># {this.state.myNumber} </Text>
           
           <Text>      </Text>
 
-          <Button onPress={this.incValue} title="Next" />
+          <TouchableOpacity style={styles.leftRight} onPress={this.incValue}> 
+          <Text style = {{fontSize: 50,color:'white'}}> {this.state.rightArrow} </Text>
+          </TouchableOpacity>
 
           </View>
-          <View style= {{marginBottom:'5%'}}></View>
-          <Button title="Set" onPress={this.setFun}></Button>
+          <View style= {{marginBottom:'3%'}}></View>
+          
+          <TouchableOpacity onPress = {this.setFun} style = {{borderWidth: 2, borderRadius: 15, backgroundColor: 'green', width: 100, height: 50, alignItems: 'center', justifyContent: 'center'}}> 
+          <Text style={{color:'white', fontSize: 25}}>Enter</Text>
+          </TouchableOpacity>
+
           <View style= {{marginBottom:'5%'}}></View>
 
-        <View style = {{backgroundColor: 'gray', marginBottom: 10, width: '100%'}}>
-        <Text style={{fontSize: 60, color: 'white', textAlign: 'center', fontWeight: 'bold'}}>{codeArr[this.state.value]}</Text>
+        <View style = {{backgroundColor: 'gray', marginBottom: 10, width: '100%', borderWidth: 2, height: 65, justifyContent: 'center'}}>
+        <Text style={{fontSize: 50, color: 'white', fontWeight: 'bold', textAlign: 'center'}}>{codeArr[this.state.value]}</Text>
         </View>
 
 
@@ -571,12 +595,10 @@ setFun = () =>{
         <Text style = {styles.textCont} >C</Text>
         </TouchableOpacity>
         </View>
-
         </View>
-
       </View>
-     
       </DismissKeyboard>
+      
     );
   }
 
@@ -599,18 +621,20 @@ const styles = StyleSheet.create({
     fontSize: 50,
     alignItems: 'center',
     justifyContent: 'center',
+    borderWidth: 2
   },
   container3: {
-    flex: .673,
+    flex: .677,
     backgroundColor: '#ddd',
     height: '90%',
     fontSize: 50,
     //width: 1000,
     alignItems: 'center',
     justifyContent: 'center',
+    borderWidth: 2
   },
   container4: {
-    flex: .327,
+    flex: .323,
     backgroundColor: '#ddd',
     height: '90%',
     fontSize: 50,
@@ -618,6 +642,7 @@ const styles = StyleSheet.create({
    // width: 1000,
     alignItems: 'center',
     justifyContent: 'center',
+    borderWidth: 2
   },
 
   textCont:{ 
@@ -627,13 +652,18 @@ const styles = StyleSheet.create({
   },
   textInput:{
     //flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#333333',
     width: '50%',
     paddingTop: '5%',
     paddingBottom: '5%',
     textAlign: 'center',
-    color: 'black',
+    color: 'white',
+    borderWidth: 2,
+    borderRadius: 20,
     fontSize: 30,
+  },
+  leftRight:{
+    backgroundColor: '#333333', width: 60, alignItems: 'center', justifyContent: 'center'
   }
  
 }); 
